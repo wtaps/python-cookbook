@@ -1,4 +1,4 @@
-#!/Users/tony/venv3/bin/python
+#!/usr/local/bin/python3.3
 
 l = [1, 2, 'date', (3, 4)]
 

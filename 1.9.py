@@ -1,4 +1,4 @@
-#!/Users/tony/venv3/bin/python
+#!/usr/local/bin/python3.3
 # -*- coding: utf-8 -*-
 """
 查找两个字典相同点

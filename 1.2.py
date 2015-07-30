@@ -1,4 +1,4 @@
-#!/Users/tony/venv3/bin/python
+#!/usr/local/bin/python3.3
 
 record = ('Tony', 187, 150, (1, 1, 2000))
 
