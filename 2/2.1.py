@@ -10,3 +10,8 @@ import re
 line = 'asdf fjdk; afed, fjek,asdf, foo'
 new_line = re.split(r'[;,\s]\s*', line)
 print(new_line)
+
+fields = re.split(r'(;|,|\s)\s*', line)
+print(fields)
+fields = re.split(r'(?:;|,|\s)\s*', line)
+print(fields)
