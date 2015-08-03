@@ -10,7 +10,6 @@ filename.startswith('spam')
 filename.endswith('txt')
 
 
-
 def read_data(name):
     if name.startswith(('http:', 'https:', 'ftp:')):
         return urlopen(name).read()
