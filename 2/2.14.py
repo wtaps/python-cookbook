@@ -6,7 +6,7 @@
 
 
 >>> parts = ['Is', 'Chicago', 'Not', 'Chicago?']
->>> ' '.joins(parts)
+>>> ' '.join(parts)
 'Is Chicago Not Chicago?'
 >>> ','.join(parts)
 'Is,Chicago,Not,Chicago?'
