@@ -1,65 +1,70 @@
 #!/usr/local/bin/python3.3
 # -*- coding: utf-8 -*-
 """
-合并拼接字符串
+字符串中插入变量
 """
 
 
-parts = ['Is', 'Chicago', 'Not', 'Chicago?']
-print(' '.join(parts))
-#'Is Chicago Not Chicago?'
-print(','.join(parts))
-#'Is,Chicago,Not,Chicago?'
-print(''.join(parts))
-#'IsChicagoNotChicago?'
+>>> s = '{name} has {n} messages.'
+>>> s.format(name='Guido', n=37)
+'Guido has 37 messages.'
+>>>
 
 
-a = 'Is Chicago'
-b = 'Not Chicago?'
-print(a + ' ' + b)
-#'Is Chicago Not Chicago?'
+>>> name = 'Guido'
+>>> n = 37
+>>> s.format_map(vars())
+'Guido has 37 messages.'
+>>>
 
 
-print('{} {}'.format(a,b))
-#'Is Chicago Not Chicago?'
-print(a + ' ' + b)
-#'Is Chicago Not Chicago?'
+>>> class Info:
+...     def __init__(self, name, n):
+...         self.name = name
+...         self.n = n
+...
+>>> a = Info('Guido',37)
+>>> s.format_map(vars(a))
+'Guido has 37 messages.'
+>>>
 
 
-a = 'Hello' 'World'
-print(a)
-#'HelloWorld'
+class safesub(dict):
+    """防止key找不到"""
+    def __missing__(self, key):
+        return '{' + key + '}'
+
+>>> del n # Make sure n is undefined
+>>> s.format_map(safesub(vars()))
+'Guido has {n} messages.'
+>>>
 
 
-data = ['ACME', 50, 91.1]
-print(','.join(str(d) for d in data))
-#'ACME,50,91.1'
+import sys
 
-c = 'Hello PC'
-print(a + ':' + b + ':' + c) # Ugly
-print(':'.join([a, b, c])) # Still ugly
-print(a, b, c, sep=':') # Better
+def sub(text):
+    return text.format_map(safesub(sys._getframe(1).f_locals))
+
+>>> name = 'Guido'
+>>> n = 37
+>>> print(sub('Hello {name}'))
+Hello Guido
+>>> print(sub('You have {n} messages.'))
+You have 37 messages.
+>>> print(sub('Your favorite color is {color}'))
+Your favorite color is {color}
+>>>
 
 
-def sample():
-    yield 'Is'
-    yield 'Chicago'
-    yield 'Not'
-    yield 'Chicago?'
+>>> name = 'Guido'
+>>> n = 37
+>>> '%(name) has %(n) messages.' % vars()
+'Guido has 37 messages.'
+>>>
 
-def combine(source, maxsize):
-    parts = []
-    size = 0
-    for part in source:
-        parts.append(part)
-        size += len(part)
-        if size > maxsize:
-            yield ''.join(parts)
-            parts = []
-            size = 0
-        yield ''.join(parts)
 
-# 结合文件操作
-with open('filename', 'w') as f:
-    for part in combine(sample(), 32768):
-        f.write(part)
+>>> import string
+>>> s = string.Template('$name has $n messages.')
+>>> s.substitute(vars())
+'Guido has 37 messages.'
+>>>
