@@ -4,7 +4,6 @@
 矩阵与线性代数运算
 """
 
-
 >>> import numpy as np
 >>> m = np.matrix([[1,-2,3],[0,4,5],[7,8,-9]])
 >>> m
@@ -35,6 +34,8 @@ matrix([[ 8],
         [32],
         [ 2]])
 >>>
+
+
 
 >>> import numpy.linalg
 
